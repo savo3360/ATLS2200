@@ -39,3 +39,9 @@ h1 {
 }
 
 /* Your CSS below here */
+
+article {
+	background-color: white;
+  border-top: 1mm solid red;
+  border-bottom: 1mm solid red;
+}
