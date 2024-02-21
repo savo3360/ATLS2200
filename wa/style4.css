@@ -41,4 +41,6 @@ html {
   .card article img{
     max-height: 100%;
     float: right;
+    width: 100px;
+    height: 100px;
   }
