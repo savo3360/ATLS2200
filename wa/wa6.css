@@ -34,7 +34,8 @@ body, html {
     color: rgb(211, 31, 31); 
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5); 
-    border: 2px solid #fff; 
+    border: 2px solid #fff;
+    padding: 5px;
 }
 
 .overlay-content2 {
@@ -42,10 +43,11 @@ body, html {
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgb(211, 31, 31); 
+    color: rgb(34, 31, 211); 
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
-    border: 2px solid #fff;  
+    border: 2px dotted rgb(214, 175, 175);  
+    padding: 5px;
 }
 
 .overlay-content h1 {
