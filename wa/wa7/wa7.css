@@ -2,7 +2,7 @@ body {
     background-color: #fff;
     color: #333;
     margin: 0;
-    font: 1.2em / 1.2 Arial, Helvetica, sans-serif;
+    font: 1.1em / 1.2 Arial, Helvetica, sans-serif;
 }
 
 img {
@@ -67,10 +67,15 @@ nav a {
     padding: 0em 1em 1em 0em;
 }
 
-/* Adjustments for the article and aside layout */
-article, aside {
-    flex: 1; /* Each takes up equal space */
+
+
+article {
+    flex: 2; /* Takes up more space */
     margin-right: 20px; /* Add gap between columns */
+}
+
+aside {
+    flex: 1; /* Takes up less space */
 }
 
 
@@ -89,7 +94,7 @@ article, aside {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 980px;
+        
     }
 
     .photos li {
