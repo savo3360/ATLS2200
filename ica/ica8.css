@@ -5,16 +5,28 @@ body{
     width: 25vw;
     height: 20vh;
     background-color: indianred;
+    transition: background-color 0.3s ease; /* Added transition for smooth color change */
+
 }
 
+#box1:hover {
+    background-color: purple; /* Change color to purple on hover */
+}
 
 #box2{
     width: 25vw;
     height:20vh;
     position: relative;
     background-color: orangered;
+    animation: box2move 2s infinite alternate; /* Added animation for box 2 */
 }
 
 @keyframes box2move{
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 50vw; /* Move box 2 to the right */
+    }
 
 }
