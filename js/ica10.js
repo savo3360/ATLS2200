@@ -1,9 +1,11 @@
+const button1 = document.querySelector(".button1");
+const button2 = document.getElementById("button2");
+const heading = document.getElementById("heading");
 
-const button = document.querySelectorAll("button");
-const heading = document.getElementById("heading"); 
-
-button.addEventListener('click', changeText);
+button1.addEventListener('click', changeText);
+button2.addEventListener('click', changeText);
 
 function changeText() {
-    heading.textContent = "New text for the heading";
+    const head = prompt("Tell me a secret");
+    heading.textContent = head;
 }
