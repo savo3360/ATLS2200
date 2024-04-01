@@ -33,7 +33,7 @@ function result() {
 
   if(customName.value !== '') {
     const name = customName.value;
-    newStory = newStory.replace(/:insertx:/g, name);
+    newStory = newStory.replace("Bob", name);
   }
 
   story.textContent = newStory;
