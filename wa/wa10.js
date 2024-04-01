@@ -9,9 +9,9 @@ function randomValueFromArray(array){
 }
 
 // RAW TEXT STRINGS
-const insertX = ['Willy the Goblin', 'Big Daddy', 'Father Christmas'];
-const insertY = ['the soup kitchen', 'Disneyland', 'the White House'];
-const insertZ = ['spontaneously combusted', 'melted into a puddle on the sidewalk', 'turned into a slug and crawled away'];
+const insertX = ['Bobby the Goblin', 'Big Daddy', 'Father Christmas'];
+const insertY = ['the soup kitchen', 'Disneyland', 'Downing Street'];
+const insertZ = ['spontaneously combusted', 'exploded', 'turned into a slug and crawled away'];
 
 // EVENT LISTENER AND PARTIAL FUNCTION DEFINITION
 randomize.addEventListener('click', result);
@@ -22,7 +22,8 @@ function result() {
   const yItem = randomValueFromArray(insertY);
   const zItem = randomValueFromArray(insertZ);
 
-  newStory += `${xItem} went for a walk. When they got to ${yItem}, they stared in horror for a few moments, then ${zItem}. Bob saw the whole thing, but was not surprised — ${xItem} weighs 300 pounds, and it was a hot day.`;
+  newStory += `${xItem} went for a long run. When they got to ${yItem}, they stared in laughter for a few moments, then ${zItem}. David saw the whole thing, but was not surprised — ${xItem} weighs 300 pounds, and it was a very cold day.`;
+
 
   if(document.getElementById("uk").checked) {
     const weight = Math.round(300 / 2.20462) + ' stone';
