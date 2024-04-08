@@ -6,6 +6,7 @@ h1 {
   body {
     width: 640px;
     margin: 0 auto;
+    background-color: olive;
   }
   
   .full-img {
@@ -26,7 +27,7 @@ h1 {
   
   button {
     border: 0;
-    background: rgba(150,150,150,0.6);
+    background: rgba(227, 125, 125, 0.6);
     text-shadow: 1px 1px 1px white;
     border: 1px solid #999;
     position: absolute;
