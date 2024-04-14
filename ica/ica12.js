@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newQuoteButton.addEventListener("click", getQuote);
 
     function getQuote() {
-        fetch("https://trivia.cyberwisp.com/getrandomchristmasquestion")
+        fetch("https://api.quotable.io/random")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch quote!");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
-                displayQuote(data.question);
+                displayQuote(data.content);
             })
             .catch(error => {
                 console.error("Error fetching quote:", error);
@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayQuote(quote) {
         quoteText.textContent = quote;
     }
+
+    
 
     getQuote();
 });
