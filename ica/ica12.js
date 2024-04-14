@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Failed to fetch quote. Please try again later.");
             });
             
-        // Reset author text and hide it
         authorText.textContent = "";
         authorText.style.display = "none";
     }
