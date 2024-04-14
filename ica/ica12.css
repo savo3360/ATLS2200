@@ -64,7 +64,7 @@ html {
   }
   
   .twitter {
-    background-color: #1da1f2;
+    background-color: #373d93;
     text-decoration: none;
   }
   
@@ -73,12 +73,12 @@ html {
   }
   
   .new-quote {
-    background-color: #4A2B0F;
+    background-color: #e53434;
     margin-bottom: 15px;
   }
   
   .new-quote:hover {
-    background-color: #6d3b0e;
+    background-color: #94adf8;
   }
   
   .new-quote:disabled {
