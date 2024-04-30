@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musical Dialer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .piano {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    .key {
+        flex: 1;
+        height: 150px;
+        border: 1px solid #ccc;
+        background-color: white;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .black-key {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 90px;
+        background-color: black;
+        z-index: 1;
+    }
+    .black-key[data-note="C#"] {
+        left: calc(0% + 10px);
+    }
+    .black-key[data-note="D#"] {
+        left: calc(20% + 10px);
+    }
+    .black-key[data-note="F#"] {
+        left: calc(60% + 10px);
+    }
+    .black-key[data-note="G#"] {
+        left: calc(80% + 10px);
+    }
+    p {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>Musical Dialer</h1>
+<p>Press the keys on the piano to enter your phone number. Here's the note-to-number conversion:</p>
+<p><strong>C - 1, C# - 2, D - 3, D# - 4, E - 5, F - 6, F# - 7, G - 8, G# - 9, A - 0</strong></p>
+<div class="piano">
+    <div class="key" data-note="C">C</div>
+    <div class="key black-key" data-note="C#">C#</div>
+    <div class="key" data-note="D">D</div>
+    <div class="key black-key" data-note="D#">D#</div>
+    <div class="key" data-note="E">E</div>
+    <div class="key" data-note="F">F</div>
+    <div class="key black-key" data-note="F#">F#</div>
+    <div class="key" data-note="G">G</div>
+    <div class="key black-key" data-note="G#">G#</div>
+    <div class="key" data-note="A">A</div>
+</div>
+<input type="text" id="phoneInput" readonly>
+<button id="submitButton">Submit</button>
+<script>
+    const notes = {
+        'C': new Audio('C.wav'),
+        'C#': new Audio('Csharp.wav'),
+        'D': new Audio('D.wav'),
+        'D#': new Audio('Dsharp.wav'),
+        'E': new Audio('E.wav'),
+        'F': new Audio('F.wav'),
+        'F#': new Audio('Fsharp.wav'),
+        'G': new Audio('G.wav'),
+        'G#': new Audio('Gsharp.wav'),
+        'A': new Audio('A.wav')
+    };
+
+    let phoneNumber = '';
+
+    // Function to play note sound
+    function playNote(note) {
+        notes[note].play();
+    }
+
+    // Function to handle key press
+    function handleKeyPress(event) {
+        const note = event.target.dataset.note;
+        if (note) {
+            playNote(note);
+            phoneNumber += note;
+            document.getElementById('phoneInput').value += note;
+        }
+    }
+
+    // Function to handle submit button click
+    function handleSubmit() {
+        console.log('Phone Number:', phoneNumber);
+        phoneNumber = '';
+        document.getElementById('phoneInput').value = '';
+    }
+
+    // Attach event listeners to keys
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => {
+        key.addEventListener('click', handleKeyPress);
+    });
+
+    // Attach event listener to submit button
+    document.getElementById('submitButton').addEventListener('click', handleSubmit);
+</script>
+</body>
+</html>
