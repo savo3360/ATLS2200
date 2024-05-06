@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pong Game</title>
+    <title>Pong your volume</title>
     <style>
         body {
             display: flex;
@@ -40,12 +40,27 @@
         audio {
             display: none; /* Hide the audio player interface */
         }
+        .volume-bar {
+            width: 200px; /* Initial width of the volume bar */
+            height: 20px;
+            background-color: #444;
+            margin-top: 20px;
+            position: relative;
+        }
+        .volume-level {
+            height: 100%;
+            background-color: #61dafb; /* Light blue color for the volume level */
+        }
     </style>
 </head>
 <body>
 <canvas id="pongCanvas"></canvas>
 <button onclick="stopGame()">Stop Game</button>
 <button onclick="restartGame()">Restart Game</button>
+
+<div class="volume-bar">
+    <div class="volume-level" id="volumeLevel"></div>
+</div>
 
 <audio id="backgroundMusic" autoplay loop>
     <source src="finalsong.mp3" type="audio/mpeg">
@@ -72,6 +87,7 @@
     let interval = setInterval(draw, 10);
 
     const audio = document.getElementById('backgroundMusic');
+    const volumeBar = document.getElementById('volumeLevel');
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -108,15 +124,10 @@
         ctx.closePath();
     }
 
-    function drawScore() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#61dafb"; // Light blue color for the score
-        ctx.fillText("Volume: " + collisionCount, 8, 20);
-    }
-
     function stopGame() {
         clearInterval(interval);
         audio.volume = Math.min(collisionCount / 100, 1);
+        volumeBar.style.width = (collisionCount * 2) + "px"; // Update volume bar width
         alert(". Volume set to: " + audio.volume.toFixed(2));
     }
 
@@ -128,6 +139,7 @@
 
     function restartGame() {
         clearInterval(interval);  // Stop current game loop
+
         // Reset game settings
         x = canvas.width / 2;
         y = canvas.height - 30;
@@ -143,7 +155,6 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
         drawPaddle();
-        drawScore();
 
         if(x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
             dx = -dx;
@@ -153,7 +164,8 @@
         } else if(y + dy > canvas.height - ballRadius) {
             if(x > paddleX && x < paddleX + paddleWidth) {
                 dy = -dy;
-                collisionCount = Math.floor(Math.random() * 100) + 1; // Generate a random collision count
+                collisionCount = Math.floor(Math.random() * 100) + 1;
+                updateVolumeBar();
             } else {
                 stopGame2();
                 window.location.reload();
@@ -169,6 +181,10 @@
 
         x += dx;
         y += dy;
+    }
+
+    function updateVolumeBar() {
+        volumeBar.style.width = (collisionCount * 2) + "px"; // Update volume bar width
     }
 </script>
 </body>
