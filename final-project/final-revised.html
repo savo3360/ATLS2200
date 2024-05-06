@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #282c34; /* Dark background for better contrast */
+            font-family: 'Arial', sans-serif;
+            color: #61dafb; /* Light blue text color for readability */
+        }
+        canvas {
+            background: #20232a; /* Darker shade for the game canvas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for 3D effect */
+            border: 2px solid #61dafb; /* Light blue border to match the text color */
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            border: none;
+            background-color: #61dafb; /* Light blue background for buttons */
+            color: #20232a; /* Dark text for contrast */
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px; /* Rounded corners for the buttons */
+            cursor: pointer; /* Cursor changes to pointer when hovering over buttons */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adding some depth with shadow */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+        }
+        button:hover {
+            background-color: #4CAF50; /* Change background color when hovered */
+            color: white; /* Change text color when hovered */
+        }
+        audio {
+            display: none; /* Hide the audio player interface */
+        }
+    </style>
+</head>
+<body>
+<canvas id="pongCanvas"></canvas>
+<button onclick="stopGame()">Stop Game</button>
+<button onclick="restartGame()">Restart Game</button>
+
+<audio id="backgroundMusic" autoplay loop>
+    <source src="finalsong.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+</audio>
+
+<script>
+    const canvas = document.getElementById('pongCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 800;
+    canvas.height = 400;
+
+    let ballRadius = 10;
+    let x = canvas.width / 2;
+    let y = canvas.height - 30;
+    let dx = 2;
+    let dy = -2;
+    const paddleHeight = 10;
+    const paddleWidth = 75;
+    let paddleX = (canvas.width - paddleWidth) / 2;
+    let rightPressed = false;
+    let leftPressed = false;
+    let collisionCount = 0;
+    let interval = setInterval(draw, 10);
+
+    const audio = document.getElementById('backgroundMusic');
+
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    function keyDownHandler(e) {
+        if(e.key == "Right" || e.key == "ArrowRight") {
+            rightPressed = true;
+        } else if(e.key == "Left" || e.key == "ArrowLeft") {
+            leftPressed = true;
+        }
+    }
+
+    function keyUpHandler(e) {
+        if(e.key == "Right" || e.key == "ArrowRight") {
+            rightPressed = false;
+        } else if(e.key == "Left" || e.key == "ArrowLeft") {
+            leftPressed = false;
+        }
+    }
+
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#61dafb"; // Matching the theme's light blue color
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function drawPaddle() {
+        ctx.beginPath();
+        ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+        ctx.fillStyle = "#61dafb"; // Matching the theme's light blue color
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function drawScore() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#61dafb"; // Light blue color for the score
+        ctx.fillText("Volume: " + collisionCount, 8, 20);
+    }
+
+    function stopGame() {
+        clearInterval(interval);
+        audio.volume = Math.min(collisionCount / 100, 1);
+        alert(". Volume set to: " + audio.volume.toFixed(2));
+    }
+
+    function stopGame2() {
+        clearInterval(interval);
+        audio.volume = 0;
+        alert("YOU LOST");
+    }
+
+    function restartGame() {
+        clearInterval(interval);  // Stop current game loop
+        // Reset game settings
+        x = canvas.width / 2;
+        y = canvas.height - 30;
+        dx = 2;
+        dy = -2;
+        paddleX = (canvas.width - paddleWidth) / 2;
+        collisionCount = 0;
+        interval = setInterval(draw, 10);  // Restart the game loop
+        
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        drawPaddle();
+        drawScore();
+
+        if(x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+            dx = -dx;
+        }
+        if(y + dy < ballRadius) {
+            dy = -dy;
+        } else if(y + dy > canvas.height - ballRadius) {
+            if(x > paddleX && x < paddleX + paddleWidth) {
+                dy = -dy;
+                collisionCount = Math.floor(Math.random() * 100) + 1; // Generate a random collision count
+            } else {
+                stopGame2();
+                return;
+            }
+        }
+
+        if(rightPressed && paddleX < canvas.width - paddleWidth) {
+            paddleX += 7;
+        } else if(leftPressed && paddleX > 0) {
+            paddleX -= 7;
+        }
+
+        x += dx;
+        y += dy;
+    }
+</script>
+</body>
+</html>
