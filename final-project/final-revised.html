@@ -11,37 +11,37 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: #282c34; /* Dark background for better contrast */
+            background: #282c34; 
             font-family: 'Arial', sans-serif;
-            color: #61dafb; /* Light blue text color for readability */
+            color: #61dafb; 
         }
         canvas {
-            background: #20232a; /* Darker shade for the game canvas */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for 3D effect */
-            border: 2px solid #61dafb; /* Light blue border to match the text color */
+            background: #20232a; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            border: 2px solid #61dafb; 
         }
         button {
             padding: 10px 20px;
             margin: 20px;
             border: none;
-            background-color: #61dafb; /* Light blue background for buttons */
-            color: #20232a; /* Dark text for contrast */
+            background-color: #61dafb; 
+            color: #20232a; 
             font-size: 16px;
             font-weight: bold;
-            border-radius: 5px; /* Rounded corners for the buttons */
-            cursor: pointer; /* Cursor changes to pointer when hovering over buttons */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adding some depth with shadow */
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+            border-radius: 5px; 
+            cursor: pointer; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+            transition: background-color 0.3s, color 0.3s; 
         }
         button:hover {
-            background-color: #4CAF50; /* Change background color when hovered */
-            color: white; /* Change text color when hovered */
+            background-color: #4CAF50; 
+            color: white; 
         }
         audio {
-            display: none; /* Hide the audio player interface */
+            display: none; 
         }
         .volume-bar {
-            width: 200px; /* Initial width of the volume bar */
+            width: 200px; 
             height: 20px;
             background-color: #444;
             margin-top: 20px;
@@ -49,7 +49,7 @@
         }
         .volume-level {
             height: 100%;
-            background-color: #61dafb; /* Light blue color for the volume level */
+            background-color: #61dafb;
         }
     </style>
 </head>
@@ -111,7 +111,7 @@
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#61dafb"; // Matching the theme's light blue color
+        ctx.fillStyle = "#61dafb";
         ctx.fill();
         ctx.closePath();
     }
@@ -119,7 +119,7 @@
     function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#61dafb"; // Matching the theme's light blue color
+        ctx.fillStyle = "#61dafb"; 
         ctx.fill();
         ctx.closePath();
     }
@@ -127,7 +127,7 @@
     function stopGame() {
         clearInterval(interval);
         audio.volume = Math.min(collisionCount / 100, 1);
-        volumeBar.style.width = (collisionCount * 2) + "px"; // Update volume bar width
+        volumeBar.style.width = (collisionCount * 2) + "px"; 
         alert(". Volume set to: " + audio.volume.toFixed(2));
     }
 
@@ -138,16 +138,16 @@
     }
 
     function restartGame() {
-        clearInterval(interval);  // Stop current game loop
+        clearInterval(interval); 
 
-        // Reset game settings
+    
         x = canvas.width / 2;
         y = canvas.height - 30;
         dx = 2;
         dy = -2;
         paddleX = (canvas.width - paddleWidth) / 2;
         collisionCount = 0;
-        interval = setInterval(draw, 10);  // Restart the game loop
+        interval = setInterval(draw, 10); 
         
     }
 
@@ -184,7 +184,7 @@
     }
 
     function updateVolumeBar() {
-        volumeBar.style.width = (collisionCount * 2) + "px"; // Update volume bar width
+        volumeBar.style.width = (collisionCount * 2) + "px";
     }
 </script>
 </body>
